@@ -64,9 +64,9 @@ SELECT * FROM tableau ORDER BY text
  SELECT * FROM tableau ORDER BY text DESC
 ```
 - Ordre id :
-  ```sql
-  SELECT * FROM tabelau ORDER BY id
-  ```
+```sql
+SELECT * FROM tabelau ORDER BY id
+```
 Ordre Descendant :
 ```sql
 SELECT * FROM tableau ORDER BY id DESC
