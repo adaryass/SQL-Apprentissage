@@ -108,63 +108,61 @@ B) Création table categories
 
 1) Table categories:
 
+```sql
 CREATE TABLE categories (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL
   );
-
+```
 
 2)Insérer des valeurs :
-
+```sql
 INSERT INTO categories (name) VALUES
 ('TEST 1'),
 ('TEST 2');
+```
 
 
-3) Liaison d'un todos à une catégorie
-
-   --> ALTER TABLE todos
-       ADD category_id INTEGER NOT NULL DEFAULT 1
-
-
-   --> SELECT * FROM todos
-
-
-4) Contrainte de clé etranger
- Lier id de la table categories avec la table todos 
-
-- C'est impossible, on va donc supprimmer la table todos et la recréer.
-
-   --> DROP TABLE todos
-
+3) Contrainte de clé etranger
+- Lier id de la table categories avec la table tableau.
+- C'est impossible, on va donc supprimmer la table tableau et la recréer.
+ ```sql
+DROP TABLE tableau
+```
 - la recréer
-
-create table todos (
+```sql
+create table tableau (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   text TEXT NOT NULL,
   done BOOL NOT NULL DEFAULT 0,
   category_id INT NOT NULL DEFAULT 1,
   FOREIGN KEY (category_id) REFERENCES categories(id)
   );
+```
+```sql
+SELECT * FROM tableau
+```
 
+```sql
+INSERT into tableau (text) VALUES ('coucou');
+INSERT INTO tableau (text, category_id) VALUES ('TODO 2', 2);
+```
 
-   --> SELECT * FROM todos
-  
-
-  --> INSERT into todos (text) VALUES ('coucou');
-  --> INSERT INTO todos (text, category_id) VALUES ('TODO 2', 2);
-
-
-5) Je veux dans la tableau todos avoir fait au lieu de done, avec AS j'ai renomée la colonne:
-  --> SELECT done AS 'Fait ? ', text AS Contenu, category_id AS Catégorie FROM todos
+5) Je veux dans la table tableau  avoir 'Fait ?' au lieu de done, avec AS j'ai renomée la colonne:
+```sql
+SELECT done AS 'Fait ? ', text AS Contenu, category_id AS Catégorie FROM tableau
+```
 
 6) Ici , qu'on va apprendre à faire une jointure; une clé étrangère pour associer des données entre elles.
 
-  --> SELECT * from todos INNER JOIN categories ON todos.category_id = categories.id;
-  --> SELECT todos.done AS 'Fait ?', todos.text AS Contenu, categories.name AS Catégorie  from todos INNER JOIN categories ON todos.category_id = categories.id;
-     --> Si je veux que des todos de categorie 2: 
-SELECT todos.done AS 'Fait ?', todos.text AS Contenu, categories.name AS Catégorie  from todos INNER JOIN categories ON todos.category_id = categories.id where categories.id = 1;
-
+```sql
+SELECT * from tableau INNER JOIN categories ON tableau.category_id = categories.id;
+SELECT tableau.done AS 'Fait ?', tableau.text AS Contenu, categories.name AS Catégorie  from todos INNER JOIN categories ON tableau.category_id = categories.id;
+```
+- Si je veux que des tableau de categorie 2:
+```sql
+SELECT tableau.done AS 'Fait ?', tableau.text AS Contenu, categories.name AS Catégorie  from todos INNER JOIN categories ON tableau.category_id = categories.id where categories.id = 1;
+```
 
 
 C) Utiliser Claude pour designer votre base de données:
