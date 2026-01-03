@@ -103,7 +103,71 @@ UPDATE todos SET text = 'Deuxième todo', done = 1 where id = 2;
 ```sql
 DELETE FROM tableau where done = 1;
 ```
+B) Création table categories
 
+
+1) Table categories:
+
+CREATE TABLE categories (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL
+  );
+
+
+2)Insérer des valeurs :
+
+INSERT INTO categories (name) VALUES
+('TEST 1'),
+('TEST 2');
+
+
+3) Liaison d'un todos à une catégorie
+
+   --> ALTER TABLE todos
+       ADD category_id INTEGER NOT NULL DEFAULT 1
+
+
+   --> SELECT * FROM todos
+
+
+4) Contrainte de clé etranger
+ Lier id de la table categories avec la table todos 
+
+- C'est impossible, on va donc supprimmer la table todos et la recréer.
+
+   --> DROP TABLE todos
+
+- la recréer
+
+create table todos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  text TEXT NOT NULL,
+  done BOOL NOT NULL DEFAULT 0,
+  category_id INT NOT NULL DEFAULT 1,
+  FOREIGN KEY (category_id) REFERENCES categories(id)
+  );
+
+
+   --> SELECT * FROM todos
+  
+
+  --> INSERT into todos (text) VALUES ('coucou');
+  --> INSERT INTO todos (text, category_id) VALUES ('TODO 2', 2);
+
+
+5) Je veux dans la tableau todos avoir fait au lieu de done, avec AS j'ai renomée la colonne:
+  --> SELECT done AS 'Fait ? ', text AS Contenu, category_id AS Catégorie FROM todos
+
+6) Ici , qu'on va apprendre à faire une jointure; une clé étrangère pour associer des données entre elles.
+
+  --> SELECT * from todos INNER JOIN categories ON todos.category_id = categories.id;
+  --> SELECT todos.done AS 'Fait ?', todos.text AS Contenu, categories.name AS Catégorie  from todos INNER JOIN categories ON todos.category_id = categories.id;
+     --> Si je veux que des todos de categorie 2: 
+SELECT todos.done AS 'Fait ?', todos.text AS Contenu, categories.name AS Catégorie  from todos INNER JOIN categories ON todos.category_id = categories.id where categories.id = 1;
+
+
+
+C) Utiliser Claude pour designer votre base de données:
 
 
 
