@@ -12,4 +12,20 @@ Ce dépôt est destiné à l’apprentissage de SQL.
  - *TEXT* : Texte long. Adapté aux articles, commentaires, etc.
  - *BOOL* : Booléen.
  - *DATETIME* : Dates et heures. Pour les horodatages précis.
- - *JSON* : Objets JSON Complets. Flexible pour les données structurées. Exemple: {"id": 1, "nom": "IBRAHIM", "tags" : ["test1", "test2", "test3"]} 
+ - *JSON* : Objets JSON Complets. Flexible pour les données structurées. Exemple: {"id": 1, "nom": "IBRAHIM", "tags" : ["test1", "test2", "test3"]}
+
+
+Lien entre tableau on utilise les relations : Une ligne dans un tableau est associée à un autre tableau.
+4 tableaux : Utlisateurs, Conversations, Messages.
+
+1) Créer un tableau qui porte le nom `todos` :
+
+```sql
+CREATE TABLE todos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  text TEXT NOT NULL,
+  done BOOL NOT NULL DEFAULT 0
+);
+
+
+
